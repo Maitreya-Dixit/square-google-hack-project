@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhavana AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .output-container {
+            background-color: #fff;
+            flex-grow: 2;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: left;
+            overflow-y: scroll;
+        }
+
+        .input-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            align-items: center;
+            flex: 1;
+        }
+
+        .overall-form {
+            width: 95%;
+            height: 95%;
+        }
+
+        .chat-box {
+            height: 75%;
+            width: 85%;
+            resize: none;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .send-button {
+            background-color: #007bff;
+            color: #fff;
+            position: relative;
+            bottom: 45%;
+            padding: 10px 20px;
+            border: none;
+            margin-left: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .send-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome, {{business_name}}.</h1>
+        <p>Interact with Bhavana, an AI capable of understanding your entire supply and demand chain.</p>
+        <p>Gain invaluable insight into your own merchant profile, including orders and inventory.</p>
+    </div>
+    <div class="output-container" id="outContainer">
+        <p style="font-family: Monaco, monospace, sans-serif">Output: {{output_text}}</p>
+    </div>
+    <div class="input-container">
+        <form method="post" action="/submit" class="overall-form">
+            <textarea class="chat-box" name="data" placeholder="Type your message here" required></textarea>
+            <button class="send-button">Send</button>
+        </form>
+    </div>
+
+    <script>
+        const chatBox = document.querySelector(".chat-box");
+        const form = document.querySelector(".overall-form")
+
+        chatBox.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" && event.shiftKey) {
+                // Insert a newline character ("\n") when Shift + Enter is pressed
+                event.preventDefault();
+                const cursorPosition = chatBox.selectionStart;
+                const text = chatBox.value;
+                chatBox.value = text.slice(0, cursorPosition) + "\n" + text.slice(cursorPosition);
+            } else if(event.key === "Enter") {
+                event.preventDefault();
+                form.submit();
+            }
+        });
+    </script>
+</body>
+</html>
