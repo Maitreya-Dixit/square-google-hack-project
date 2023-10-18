@@ -4,6 +4,5 @@ fastapi
 uvicorn
 aiofiles
 jinja2
-squareup
 configparser
 google
