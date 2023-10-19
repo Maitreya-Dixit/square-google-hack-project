@@ -4,23 +4,28 @@ from fastapi.templating import Jinja2Templates
 from fastapi import Request, Response
 from fastapi.responses import RedirectResponse
 from square.client import Client
-import configparser
 import json
 import google.generativeai as palm
+import os
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
-config = configparser.ConfigParser()
-config.read("config.ini")
-CONFIG_TYPE = config.get("DEFAULT", "environment").upper()
-APPLICATION_ID = config.get(CONFIG_TYPE, "square_application_id")
-LOCATION_ID = config.get(CONFIG_TYPE, "square_location_id")
-ACCESS_TOKEN = config.get(CONFIG_TYPE, "square_access_token")
-API_KEY = config.get(CONFIG_TYPE, "palm_api_key")
+APPLICATION_ID = os.getenv("square_application_id")
+LOCATION_ID = os.getenv("square_location_id")
+ACCESS_TOKEN = os.getenv("square_access_token")
+API_KEY = os.getenv("palm_api_key")
+
+# config = configparser.ConfigParser()
+# config.read("config.ini")
+# CONFIG_TYPE = config.get("DEFAULT", "environment").upper()
+# APPLICATION_ID = config.get(CONFIG_TYPE, "square_application_id")
+# LOCATION_ID = config.get(CONFIG_TYPE, "square_location_id")
+# ACCESS_TOKEN = config.get(CONFIG_TYPE, "square_access_token")
+# API_KEY = config.get(CONFIG_TYPE, "palm_api_key")
 
 client = Client(
     access_token=ACCESS_TOKEN,
-    environment=config.get("DEFAULT", "environment"),
+    environment="sandbox",
 )
 
 palm.configure(api_key=API_KEY)
