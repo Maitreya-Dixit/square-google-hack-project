@@ -1,3 +1,6 @@
+## Live Demo (For Now)
+https://bhavanaai.onrender.com
+
 ## Inspiration
 It's often easy to get lost in the complexity of the entire supply and demand process. Even though multiple UI's have been developed to help Square sellers navigate the process associated with tracking inventory count for corresponding catalog items, there isn't an easy way to quickly acquire this information. Oftentimes, the Square seller will have to manually check inventory counts and make sure there is enough of a product to successfully continue meeting demand.
 
