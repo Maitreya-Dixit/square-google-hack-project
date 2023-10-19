@@ -16,13 +16,14 @@ CONFIG_TYPE = config.get("DEFAULT", "environment").upper()
 APPLICATION_ID = config.get(CONFIG_TYPE, "square_application_id")
 LOCATION_ID = config.get(CONFIG_TYPE, "square_location_id")
 ACCESS_TOKEN = config.get(CONFIG_TYPE, "square_access_token")
+API_KEY = config.get(CONFIG_TYPE, "palm_api_key")
 
 client = Client(
     access_token=ACCESS_TOKEN,
     environment=config.get("DEFAULT", "environment"),
 )
 
-palm.configure(api_key="AIzaSyDxoIWeGEGLFQKr0t01OMRZaIxOyr1I91o")
+palm.configure(api_key=API_KEY)
 
 models = [m for m in palm.list_models() if 'generateText' in m.supported_generation_methods]
 model = models[0].name
